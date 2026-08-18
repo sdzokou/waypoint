@@ -9,6 +9,7 @@ kind of outing. DayHike, BackpackingRoute and TrailRun supply that behaviour.
 from abc import ABC, abstractmethod
 
 from waypoint_core.distance import Distance
+from waypoint_core.mixins import ElevationMixin, RatingMixin
 
 
 class Trail(ABC):
@@ -365,3 +366,26 @@ class GuidedDayHike(DayHike):
         :return: a one-line description naming the guide
         """
         return f"{super().summary()} — led by {self.guide_name}"
+
+
+class RatedMountainHike(ElevationMixin, RatingMixin, DayHike):
+    """
+    A day hike that also reports its grade and collects visitor ratings.
+
+    MRO: RatedMountainHike -> ElevationMixin -> RatingMixin -> DayHike
+         -> Trail -> ABC -> object
+
+    Python walks that list left to right, so a name defined in a mixin wins
+    over the same name in DayHike. The mixins come first deliberately.
+    """
+
+    def summary(self):
+        """
+        Extend the DayHike summary with grade and rating.
+
+        :return: a one-line description including steepness and stars
+        """
+        return (
+            f"{super().summary()} — {self.steepness_label()} "
+            f"({self.grade_percent():.1f}%), rated {self.average_rating():.1f}/5"
+        )
