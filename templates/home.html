@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ site_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1>{{ site_name }}</h1>
+    <p class="tagline">{{ tagline }}</p>
+</header>
+
+<main>
+    <p>Welcome, {{ visitor }}.</p>
+    <nav>
+        <a href="{% url 'search' %}">Search trails</a>
+        <a href="{% url 'report' %}">Report a trail</a>
+    </nav>
+</main>
+
+<footer>
+    <p>CCGC-5003 term project</p>
+</footer>
+</body>
+</html>
