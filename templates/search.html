@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search trails</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1>Search trails</h1>
+</header>
+
+<main>
+    <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Trail name">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if searched %}
+        {% if matches %}
+            <ul>
+                {% for name in matches %}
+                    <li>{{ forloop.counter }}. {{ name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No trail matches "{{ query }}".</p>
+        {% endif %}
+    {% else %}
+        <p>Type a trail name to search.</p>
+    {% endif %}
+
+    <p><a href="{% url 'home' %}">Back to home</a></p>
+</main>
+</body>
+</html>
