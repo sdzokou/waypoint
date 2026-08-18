@@ -6,8 +6,7 @@ Individual term project — CCGC-5003, Summer 2026.
 ## Project layout
 
 - `waypoint_core/` — the pure-Python domain engine (trails, distances, itineraries)
-- `waypoint/` — Django project configuration
-- `catalog/` — Django app serving the trail catalog
+- `waypoint_site/` — Django project configuration
 
 ## Setup
 
@@ -18,12 +17,16 @@ Individual term project — CCGC-5003, Summer 2026.
 ## Run
 
     python manage.py migrate
-    python manage.py runserver
+    python manage.py runserver 8010
 
-Then open http://127.0.0.1:8000/
+Then open http://127.0.0.1:8010/
+
+Note: port 8000 is unavailable on the development machine (reserved by
+Windows), so the project runs on 8010. Any free port works.
 
 ## Releases
 
 | Tag | Part |
 |-----|------|
 | v7  | Domain model — classes & objects |
+| v9  | Django project setup |
