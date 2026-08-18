@@ -70,3 +70,48 @@ footer {
     font-size: 0.875rem;
     color: #5c6f66;
 }
+
+/* Trail catalog */
+
+.site-nav {
+    margin-bottom: 1.5rem;
+}
+
+.site-nav a {
+    margin-right: 1.25rem;
+}
+
+table.catalog {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+table.catalog th,
+table.catalog td {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #d8ddd6;
+}
+
+table.catalog th {
+    font-weight: 600;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    background: #e6ebe4;
+}
+
+.badge-closed {
+    background: #7a1f1f;
+    color: #ffffff;
+}
+
+.badge-hard {
+    background: #a8600f;
+    color: #ffffff;
+}
