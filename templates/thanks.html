@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Thank you</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-<header>
-    <h1>Thank you, {{ name }}.</h1>
-</header>
+{% extends "base.html" %}
 
-<main>
+{% block title %}Thank you{% endblock %}
+
+{% block content %}
+    <h2>Thank you, {{ name }}.</h2>
+
     <p>Your report on <strong>{{ trail }}</strong> has been received.</p>
     <blockquote>{{ note }}</blockquote>
     <p>We will reply to {{ email }} if we need more detail.</p>
-    <p><a href="{% url 'home' %}">Back to home</a></p>
-</main>
-</body>
-</html>
+{% endblock %}

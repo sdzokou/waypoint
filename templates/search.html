@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search trails</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-<header>
-    <h1>Search trails</h1>
-</header>
+{% extends "base.html" %}
 
-<main>
+{% block title %}Search trails{% endblock %}
+
+{% block content %}
+    <h2>Search trails</h2>
+
     <form method="get" action="{% url 'search' %}">
         <input type="text" name="q" value="{{ query }}" placeholder="Trail name">
         <button type="submit">Search</button>
@@ -30,8 +23,4 @@
     {% else %}
         <p>Type a trail name to search.</p>
     {% endif %}
-
-    <p><a href="{% url 'home' %}">Back to home</a></p>
-</main>
-</body>
-</html>
+{% endblock %}
