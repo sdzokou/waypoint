@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ site_name|default:"Waypoint" }}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1>{{ site_name|default:"Waypoint" }}</h1>
+    <p class="tagline">{{ tagline|default:"Find a trail, plan the day." }}</p>
+</header>
+
+{% include "partials/navbar.html" %}
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+{% include "partials/footer.html" %}
+</body>
+</html>
