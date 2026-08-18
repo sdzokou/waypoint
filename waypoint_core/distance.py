@@ -87,3 +87,85 @@ class Distance:
         :return: a string such as Distance(12.5, 'km')
         """
         return f"Distance({self._magnitude!r}, {self._unit!r})"
+    
+    def _as_self_unit(self, other):
+        """
+        Return other's magnitude expressed in this Distance's unit.
+
+        Shared helper for the arithmetic and comparison operators, so the
+        auto-conversion rule lives in exactly one place.
+
+        :param other: the Distance to read
+        :return: the magnitude as a float, in self's unit
+        """
+        return other.convert(self._unit)._magnitude
+
+    def __add__(self, other):
+        """
+        Add two distances; the result keeps the left operand's unit.
+
+        Mixed units are converted automatically rather than rejected, so a
+        total never fails because trails were entered in different units.
+
+        :param other: the Distance to add
+        :return: a new Distance, or NotImplemented if other is not a Distance
+        """
+        if not isinstance(other, Distance):
+            return NotImplemented
+        return Distance(self._magnitude + self._as_self_unit(other), self._unit)
+
+    def __sub__(self, other):
+        """
+        Subtract a distance from this one; the result keeps the left unit.
+
+        :param other: the Distance to subtract
+        :raises ValueError: if the result would be negative
+        :return: a new Distance, or NotImplemented if other is not a Distance
+        """
+        if not isinstance(other, Distance):
+            return NotImplemented
+        return Distance(self._magnitude - self._as_self_unit(other), self._unit)
+
+    def __eq__(self, other):
+        """
+        Compare two distances by physical length, not by stored unit.
+
+        5 km and its exact equivalent in miles are the same length, so they
+        compare equal. A small tolerance absorbs floating-point drift.
+
+        :param other: the object to compare against
+        :return: True if both represent the same length
+        """
+        if not isinstance(other, Distance):
+            return NotImplemented
+        return abs(self._magnitude - self._as_self_unit(other)) < 1e-9
+
+    def __hash__(self):
+        """
+        Keep Distance hashable after defining __eq__.
+
+        :return: a hash based on the length in kilometres
+        """
+        return hash(round(self.convert("km")._magnitude, 9))
+
+    def __lt__(self, other):
+        """
+        Order distances by physical length, so sorted() works on a list.
+
+        :param other: the Distance to compare against
+        :return: True if this distance is shorter
+        """
+        if not isinstance(other, Distance):
+            return NotImplemented
+        return self._magnitude < self._as_self_unit(other)
+
+    def __gt__(self, other):
+        """
+        Order distances by physical length.
+
+        :param other: the Distance to compare against
+        :return: True if this distance is longer
+        """
+        if not isinstance(other, Distance):
+            return NotImplemented
+        return self._magnitude > self._as_self_unit(other)
