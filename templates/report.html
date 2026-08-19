@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Report a trail</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-<header>
-    <h1>Report a trail</h1>
-</header>
+{% extends "base.html" %}
 
-<main>
+{% block title %}Report a trail{% endblock %}
+
+{% block content %}
+    <h2>Report a trail</h2>
+
     <form method="post" action="{% url 'report' %}">
         {% csrf_token %}
         <p>
@@ -32,7 +25,4 @@
         </p>
         <button type="submit">Send report</button>
     </form>
-    <p><a href="{% url 'home' %}">Back to home</a></p>
-</main>
-</body>
-</html>
+{% endblock %}
